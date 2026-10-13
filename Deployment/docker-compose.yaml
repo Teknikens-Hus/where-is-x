@@ -1,0 +1,15 @@
+services:
+  whereis:
+    image: ghcr.io/teknikenshsu/where-is-x:latest
+    env_file: .env
+    environment:
+      DATA_FILE: /data/days.json
+      PORT: "3000"
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - whereis-data:/data
+    restart: unless-stopped
+
+volumes:
+  whereis-data:

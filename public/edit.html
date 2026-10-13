@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where is x</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/theme.js"></script>
+</head>
+<body data-mode="edit">
+  <header>
+    <div>
+      <h1 id="heading">Where is x</h1>
+      <nav><a href="/" data-i18n="exitEditMode"></a></nav>
+    </div>
+    <button id="theme" data-i18n-aria="theme"></button>
+  </header>
+  <main>
+    <div class="card">
+      <div class="toolbar">
+        <h2 id="title" class="calendar-title"></h2>
+        <div class="toolbar-actions">
+          <button id="prev" data-i18n-aria="prev">&larr;</button>
+          <button id="today" data-i18n="today"></button>
+          <button id="next" data-i18n-aria="next">&rarr;</button>
+        </div>
+      </div>
+      <div id="months"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <section class="summary" id="summary"></section>
+  </main>
+  <footer id="version" class="version"></footer>
+  <script src="/app.js"></script>
+</body>
+</html>

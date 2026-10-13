@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: where-is-x
+  labels:
+    app: where-is-x
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: where-is-x
+  template:
+    metadata:
+      labels:
+        app: where-is-x
+    spec:
+      containers:
+        - name: where-is-x
+          image: ghcr.io/teknikenshsu/where-is-x:latest
+          env:
+            - name: PORT
+              value: "3000"
+            - name: DATA_FILE
+              value: "/data/days.json"
+            - name: APP_LANG
+              value: "en"
+            - name: X_OBJECT
+              value: "x"
+            - name: HEADER_TEXT
+              value: "Where is X?"
+            - name: LOCATIONS
+              value: "Not sure,Office,Home,ISS"
+          ports:
+            - containerPort: 3000
+              name: web
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: whereisx-data-pvc
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: whereisx-data-pvc
+  labels:
+    app: where-is-x
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: your-storage-class-name
+  resources:
+    requests:
+      storage: 32Mi #Only small json file
+
+---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: where-is-x
+labels:
+  app: where-is-x
+spec:
+  type: ClusterIP # or NodePort/LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: where-is-x
