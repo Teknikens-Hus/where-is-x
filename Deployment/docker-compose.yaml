@@ -1,6 +1,6 @@
 services:
   whereis:
-    image: ghcr.io/teknikenshsu/where-is-x:latest
+    image: ghcr.io/teknikens-hus/where-is-x:latest
     env_file: .env
     environment:
       DATA_FILE: /data/days.json

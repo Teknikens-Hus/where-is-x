@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: where-is-x
-          image: ghcr.io/teknikenshsu/where-is-x:latest
+          image: ghcr.io/teknikens-hus/where-is-x:latest # better pin to a specific version
           env:
             - name: PORT
               value: "3000"

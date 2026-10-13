@@ -45,3 +45,15 @@ jobs:
           tags: |
             ghcr.io/teknikens-hus/where-is-x:${{ steps.version.outputs.version }}
             ghcr.io/teknikens-hus/where-is-x:latest
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
